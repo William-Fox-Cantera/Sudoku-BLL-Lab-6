@@ -17,6 +17,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
@@ -393,7 +394,7 @@ public class SudokuController implements Initializable {
 
 								// TODO: Set the message for mistakes
 								if (game.getShowHints()) {
-
+										new Alert(Alert.AlertType.INFORMATION, "You've made a mistake! Make sure to check the row, column, and region you choose.").showAndWait();
 								}
 							}
 
@@ -423,6 +424,7 @@ public class SudokuController implements Initializable {
 
 				if (game.getSudoku().isPuzzleMaxMistakes()) {
 					// Game is over... Max Mistakes reached
+					EndGame();
 				}
 
 			}
@@ -436,6 +438,8 @@ public class SudokuController implements Initializable {
 		// Disable the hboxNumbers items so they can't be dragged
 		// Show message that the game is over
 		// Allow them to 'clear' cells / reset mistakes
+		new Alert(Alert.AlertType.INFORMATION, "Max mistakes for chosen difficulty reached, Game Over.").showAndWait();
+		hboxNumbers.setDisable(false);
 	}
 
 	private Image GetImage(int iValue) {
